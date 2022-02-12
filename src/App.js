@@ -1,22 +1,57 @@
-import logo from './logo.svg';
 import './App.css';
+import { useTable } from "react-table";
+import { columns, data } from "./pref_ranking";
+
+
+export default function App() {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow
+  } = useTable({
+    columns,
+    data
+  });
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          React-table つかってみた。
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　{column.render("Header")}
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return (
+                  <td {...cell.getCellProps()}>
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　   {cell.render("Cell")}
+                  </td>;
+                )
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
       </header>
     </div>
   );
