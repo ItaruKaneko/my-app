@@ -3,7 +3,7 @@ import { useTable } from "react-table";
 import { columns, data } from "./pref_ranking";
 
 
-export default function App() {
+function App() {
   const {
     getTableProps,
     getTableBodyProps,
@@ -55,3 +55,4 @@ export default function App() {
     </div>
   );
 }
+export default App;
